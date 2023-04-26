@@ -1,32 +1,42 @@
 package it.uniroma3.diadia.giocatore;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 public class BorsaTest {
+
 	Borsa borsaDiProva = new Borsa();
-	Attrezzo penna = new Attrezzo("penna", 2);
-	Attrezzo scudo = new Attrezzo("scudo", 20);
+	Attrezzo lanterna;
+	Attrezzo osso;
 	
+	@Before
+	public void setUp() {
+		lanterna = new Attrezzo("lanterna", 20);
+		osso = new Attrezzo("osso", 1);
+	}
+
 	@Test
-	public void testaddAttrezzo() {
-		borsaDiProva.addAttrezzo(penna);
-		assertEquals(true, borsaDiProva.addAttrezzo(penna));
+	public void testAddAttrezzoPesoMinoreDiDieci() {
+		assertTrue(borsaDiProva.addAttrezzo(osso));
+
 	}
 	
 	@Test
-	public void testaddAttrezzoDiPesoMaggioreDi10() {
-		borsaDiProva.addAttrezzo(scudo);
-		assertFalse(borsaDiProva.addAttrezzo(scudo));
+	public void testAddAttrezzoPesoMaggioreDiDieci() {
+		assertFalse(borsaDiProva.addAttrezzo(lanterna));
+
 	}
 	
 	@Test
-	public void testhasAttrezzo() {
-		borsaDiProva.addAttrezzo(penna);
-		assertTrue(borsaDiProva.hasAttrezzo("penna"));
+	public void testGetPeso() {
+		borsaDiProva.addAttrezzo(osso);
+		assertEquals(osso, borsaDiProva.getAttrezzo("osso"));
+
 	}
-	
 }

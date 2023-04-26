@@ -1,20 +1,17 @@
 package it.uniroma3.diadia;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.ambienti.*;
 
 public class PartitaTest {
-	Partita partitaDiProva = new Partita();
-	Stanza stanzaDiProva = new Stanza("stanzaDiProva");
 
-	@Test
-	public void testisFinita() {
-		assertFalse(partitaDiProva.isFinita());
-	}
+	Partita partitaDiProva = new Partita();
+	Stanza stanzaDiProva = new Stanza("Stanza");
 	
 	@Test
 	public void testGetStanzaVincente() {
@@ -22,9 +19,14 @@ public class PartitaTest {
 	}
 
 	@Test
-	public void testsetStanzaCorrente() {
+	public void testSetStanzaCorrente() {
 		partitaDiProva.getLabirinto().setStanzaCorrente(stanzaDiProva);
 		assertEquals(stanzaDiProva, partitaDiProva.getLabirinto().getStanzaCorrente());
 	}
-}
+
+	@Test
+	public void testIsFinita() {
+		assertFalse(partitaDiProva.isFinita());
+	}
 	
+}
