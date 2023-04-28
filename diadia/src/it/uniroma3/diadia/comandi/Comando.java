@@ -21,7 +21,7 @@ public interface Comando {
 
 	void setParametro(String parametro);
 
-	String getParametro();
+	public String getParametro();
 
 	public void setIo(IO io);
 	

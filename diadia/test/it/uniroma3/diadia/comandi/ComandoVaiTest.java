@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +11,8 @@ import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.IOSimulator;
+import it.uniroma3.diadia.fixture.Fixture;
 
 public class ComandoVaiTest {
 
@@ -52,5 +53,21 @@ public class ComandoVaiTest {
 		vai.setParametro("in fondo a destra");
 		vai.esegui(partitaDiProva);
 		assertNotEquals(s2, partitaDiProva.getStanzaCorrente());
+	}
+	
+	@Test
+	public void testPartitaConComandoVai() {
+		String[] righeDaLeggere = {"vai nord", "fine"};
+		IOSimulator io = Fixture.creaSimulazionePartitaEGioca(righeDaLeggere);
+		assertTrue(io.hasNextMessaggio());
+		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
+		assertTrue(io.hasNextMessaggio());
+		assertContains("Biblioteca", io.nextMessaggio());
+		assertTrue(io.hasNextMessaggio());
+		assertEquals("Hai vinto!", io.nextMessaggio());
+
+	}
+	public void assertContains (String expected, String nextMessaggio) {
+		assertTrue(nextMessaggio.contains(expected));
 	}
 }

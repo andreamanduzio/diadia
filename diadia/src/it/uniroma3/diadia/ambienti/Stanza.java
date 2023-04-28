@@ -14,25 +14,25 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Stanza {
 
-	public Stanza[] getStanzeAdiacenti() {
-		return stanzeAdiacenti;
-	}
-
-	public void setStanzeAdiacenti(Stanza[] stanzeAdiacenti) {
-		this.stanzeAdiacenti = stanzeAdiacenti;
-	}
-
-	public int getNumeroStanzeAdiacenti() {
-		return numeroStanzeAdiacenti;
-	}
-
-	public void setNumeroStanzeAdiacenti(int numeroStanzeAdiacenti) {
-		this.numeroStanzeAdiacenti = numeroStanzeAdiacenti;
-	}
-
-	public void setDirezioni(String[] direzioni) {
-		this.direzioni = direzioni;
-	}
+//	public Stanza[] getStanzeAdiacenti() {
+//		return stanzeAdiacenti;
+//	}
+//
+//	public void setStanzeAdiacenti(Stanza[] stanzeAdiacenti) {
+//		this.stanzeAdiacenti = stanzeAdiacenti;
+//	}
+//
+//	public int getNumeroStanzeAdiacenti() {
+//		return numeroStanzeAdiacenti;
+//	}
+//
+//	public void setNumeroStanzeAdiacenti(int numeroStanzeAdiacenti) {
+//		this.numeroStanzeAdiacenti = numeroStanzeAdiacenti;
+//	}
+//
+//	public void setDirezioni(String[] direzioni) {
+//		this.direzioni = direzioni;
+//	}
 
 	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
 	private static final int NUMERO_MASSIMO_ATTREZZI = 10;

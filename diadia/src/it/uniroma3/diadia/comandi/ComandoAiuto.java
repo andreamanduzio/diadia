@@ -18,13 +18,11 @@ public class ComandoAiuto implements Comando {
 
 	@Override
 	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public String getParametro() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

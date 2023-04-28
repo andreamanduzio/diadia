@@ -56,8 +56,8 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
-		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica(this.io);
-		comandoDaEseguire = factory.costruisciComando(istruzione);
+		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
+		comandoDaEseguire = factory.costruisciComando(istruzione, io);
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
 			io.mostraMessaggio("Hai vinto!");

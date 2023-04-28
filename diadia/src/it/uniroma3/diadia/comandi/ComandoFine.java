@@ -13,7 +13,7 @@ public class ComandoFine implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 		partita.setFinita();
-		io.mostraMessaggio(MESSAGGIO_FINE);  // si desidera smettere
+		this.io.mostraMessaggio(MESSAGGIO_FINE);  // si desidera smettere
 
 	}
 

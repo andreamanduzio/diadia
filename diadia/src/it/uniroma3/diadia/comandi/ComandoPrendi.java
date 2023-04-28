@@ -18,6 +18,7 @@ public class ComandoPrendi implements Comando {
 		Attrezzo attrezzo = partita.getLabirinto().getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		Stanza corrente = partita.getLabirinto().getStanzaCorrente();
+		
 		if(borsa.getPesoRimanente(attrezzo)) {
 			borsa.addAttrezzo(attrezzo);
 			corrente.removeAttrezzo(attrezzo);
