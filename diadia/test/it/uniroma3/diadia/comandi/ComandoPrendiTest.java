@@ -3,63 +3,79 @@ package it.uniroma3.diadia.comandi;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Set;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendiTest {
 
-	private Partita partitaDiProva;
-	private Attrezzo attrezzoDiProva;
-	private Attrezzo attrezzoDiProvaPesante;
-	private Attrezzo attrezzoDiProvaNull;
-	private Comando comandoDiProva;
+	private Partita partita;
+	private Attrezzo attrezzo;
+	private Attrezzo attrezzoPesante;
+	private Attrezzo attrezzoNull;
+	private Comando comando;
 	private IO io;
+	Labirinto labirinto;
 	
 	@Before
-	public void setUp() {
-		partitaDiProva = new Partita();
-		attrezzoDiProva = new Attrezzo("lanterna", 2);
-		attrezzoDiProvaPesante = new Attrezzo("piedediporco", 17);
-		attrezzoDiProvaNull = null;
-		comandoDiProva = new ComandoPrendi();
+	public void setUp() throws Exception {
+		labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("martello", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
+		partita = new Partita(labirinto);
+		attrezzo = new Attrezzo("martello", 2);
+		attrezzoPesante = new Attrezzo("incudine", 11);
+		attrezzoNull = null;
+		comando = new ComandoPrendi();
 		io = new IOConsole();
-		comandoDiProva.setIo(io);
+		comando.setIo(io);
+	}
+
+
+	@After
+	public void tearDown() throws Exception {
 	}
 	
 	public boolean attrezzoPresente(String s) {
-		Attrezzo[] array = partitaDiProva.getStanzaCorrente().getAttrezzi();
-		for(Attrezzo a : array) {
-			if(a != null && s.equals(a.getNome()))
-					return true;
+		//Set<Attrezzo> set = partita.getStanzaCorrente().getAttrezzi();
+		if(partita.getStanzaCorrente().getAttrezzo(s)==null)
+			return false;
+		return true;
 		}
-		return false;
-	}
 	
 	@Test
 	public void testAttrezzoPreso() {
-		partitaDiProva.getStanzaCorrente().addAttrezzo(attrezzoDiProva);
-		comandoDiProva.setParametro("lanterna");
-		comandoDiProva.esegui(partitaDiProva);
-		assertFalse(attrezzoPresente("lanterna"));
+		partita.getStanzaCorrente().addAttrezzo(attrezzo);
+		comando.setParametro("martello");
+		comando.esegui(partita);
+		assertFalse(attrezzoPresente("martello"));
 	}
+	
 	@Test
 	public void testAttrezzoNonPresente() {
-		comandoDiProva.setParametro("lanterna");
-		comandoDiProva.esegui(partitaDiProva);
-		assertFalse(attrezzoPresente("lanterna"));
+		comando.setParametro("martello");
+		comando.esegui(partita);
+		assertFalse(attrezzoPresente("martello"));
 	}
 	
 	@Test
 	public void testAttrezzoPesante() {
-		partitaDiProva.getStanzaCorrente().addAttrezzo(attrezzoDiProvaPesante);
-		comandoDiProva.setParametro("piedediporco");
-		comandoDiProva.esegui(partitaDiProva);
-		assertTrue(attrezzoPresente("piedediporco"));
+		partita.getStanzaCorrente().addAttrezzo(attrezzoPesante);
+		comando.setParametro("incudine");
+		comando.esegui(partita);
+		assertTrue(attrezzoPresente("incudine"));
 	}
 	
 }

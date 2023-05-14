@@ -2,6 +2,7 @@ package it.uniroma3.diadia.comandi;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,33 +13,37 @@ public class FabbricaDiComandiFisarmonicaTest {
 
 	private FabbricaDiComandiFisarmonica fabbrica;
 	private IO io;
-	private Comando comandoDiProva;
+	private Comando expected;
 	
 	@Before
-	public void setUp(){
+	public void setUp() throws Exception {
 		io = new IOConsole();
-		fabbrica = new FabbricaDiComandiFisarmonica();
-		comandoDiProva = new ComandoNonValido();
+		fabbrica = new FabbricaDiComandiFisarmonica(io);
 	}
-	
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
 	@Test
 	public void testComandoNonValido() {
-		assertEquals( comandoDiProva.getNome(), fabbrica.costruisciComando("pippo", io).getNome());
+		expected = new ComandoNonValido();
+		assertEquals( expected.getNome(), fabbrica.costruisciComando("pippo").getNome());
 	}
 	
 	@Test
 	public void testComandoConParametro() {
-		comandoDiProva = new ComandoVai();
-		comandoDiProva.setParametro("sud");
-		Comando corrente = fabbrica.costruisciComando("vai sud", io);
-		assertEquals( comandoDiProva.getNome(), corrente.getNome());
-		assertEquals( comandoDiProva.getParametro(), corrente.getParametro());
+		expected = new ComandoVai();
+		expected.setParametro("nord");
+		Comando current = fabbrica.costruisciComando("vai nord");
+		assertEquals( expected.getNome(), current.getNome());
+		assertEquals( expected.getParametro(), current.getParametro());
 	}
 	
 	@Test
 	public void testComandoSenzaParametro() {
-		comandoDiProva = new ComandoFine();
-		assertEquals( comandoDiProva.getNome(), fabbrica.costruisciComando("fine", io).getNome());
+		expected = new ComandoFine();
+		assertEquals( expected.getNome(), fabbrica.costruisciComando("fine").getNome());
 	}
 
 }

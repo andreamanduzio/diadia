@@ -1,33 +1,45 @@
 package it.uniroma3.diadia.comandi;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.DiaDia;
-import it.uniroma3.diadia.IO;
-import it.uniroma3.diadia.IOConsole;
-import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.IOSimulator;
+import it.uniroma3.diadia.fixture.Fixture;
 
 public class ComandoAiutoTest {
-	private Partita partitaDiProva;
-	private IO io;
-	private Comando comandoDiProva;
+
+	List<String> righeDaLeggere;
 
 	@Before
-	public void setUp() {
-		partitaDiProva = new Partita();
-		comandoDiProva = new ComandoAiuto();
-		io = new IOConsole();
-		comandoDiProva.setIo(io);
-	}
-	
-	@Test
-	public void testComandoFine() {
-		comandoDiProva.setParametro("aiuto");
-		//comandoDiProva.esegui(partitaDiProva);
-		assertEquals("aiuto", comandoDiProva.getNome());
+	public void setUp() throws Exception {
+		righeDaLeggere = new ArrayList<>();
 	}
 
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testPartitaConComandoAiuto() {
+		righeDaLeggere.add("aiuto");
+		righeDaLeggere.add("fine");
+		IOSimulator io = Fixture.creaSimulazionePartitaEGiocaEasy(righeDaLeggere);
+		assertTrue(io.hasNextMessaggio());
+		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
+		for(int i=0; i < ComandoAiuto.ELENCO_COMANDI.length; i++) {
+			assertTrue(io.hasNextMessaggio());
+			assertEquals(ComandoAiuto.ELENCO_COMANDI[i]+" ", io.nextMessaggio());
+		}
+		assertTrue(io.hasNextMessaggio());
+		io.nextMessaggio();
+		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
+	}
 }

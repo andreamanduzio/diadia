@@ -4,20 +4,23 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.Stanza;
-
 public class LabirintoTest {
 	Labirinto l;
 	Stanza biblioteca;
-	Stanza A10;
+	Stanza DS1;
 
 	@Before
 	public void setUp() {
-		l = new Labirinto();
-		l.creaStanze();
+		l = Labirinto.newBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("martello", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
+		
 		biblioteca = new Stanza("Biblioteca");
-		A10 = new Stanza("A10");
+		DS1 = new Stanza("DS1");
+		
 	}
 
 
@@ -29,8 +32,8 @@ public class LabirintoTest {
 
 	@Test
 	public void testSetStanzaCorrente() {
-		l.setStanzaCorrente(A10);
-		assertEquals(A10, l.getStanzaCorrente());
+		l.setStanzaCorrente(DS1);
+		assertEquals(DS1, l.getStanzaCorrente());
 	}
 	@Test
 	public void testGetStanzaCorrente() {
