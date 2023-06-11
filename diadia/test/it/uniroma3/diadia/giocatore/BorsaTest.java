@@ -18,7 +18,6 @@ import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.attrezzi.ComparatoreAttrezziPerPeso;
-import it.uniroma3.diadia.attrezzi.ComparatorePerPeso;
 
 public class BorsaTest {
 

@@ -7,22 +7,21 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class GiocatoreTest {
 	
-	Giocatore giocatoreDiProva = new Giocatore();
+	Giocatore g = new Giocatore();
 	
 	@Test
 	public void testGetCfuDefault() {
-		assertEquals(20, giocatoreDiProva.getCfu());
+		assertEquals(20, g.getCfu());
 	}
 	
 	@Test
 	public void testSetCfu() {
-		giocatoreDiProva.setCfu(3);
-		assertEquals(3, giocatoreDiProva.getCfu());
+		g.setCfu(3);
+		assertEquals(3, g.getCfu());
 	}
 
 	@Test
 	public void testGetBorsaDefault() {
-		assertNotNull(giocatoreDiProva.getBorsa());
+		assertNotNull(g.getBorsa());
 	}
 }
-

@@ -28,7 +28,7 @@ public class ComandoAiutoTest {
 	}
 
 	@Test
-	public void testPartitaConComandoAiuto() {
+	public void testPartitaConComandoAiuto() throws Exception {
 		righeDaLeggere.add("aiuto");
 		righeDaLeggere.add("fine");
 		IOSimulator io = Fixture.creaSimulazionePartitaEGiocaEasy(righeDaLeggere);
